@@ -7,4 +7,4 @@ title: About osaTeam
 OSA Team предлагает безопасно номинировать свои токены в наши ноды.
 Поздее тут будет краткий текст о нас.
 
-![Toys](/assets/sebastiaan-stam-5hbrem-5mnq-unsplash.jpg "osaTeam")
+![osaTeam](/assets/sebastiaan-stam-5hbrem-5mnq-unsplash.jpg "osaTeam")

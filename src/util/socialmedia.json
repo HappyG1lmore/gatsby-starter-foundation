@@ -1,24 +1,20 @@
 {
   "socialIcons": [
     {
-      "icon": "facebook",
-      "url": "https://www.facebook.com/stackrolecom"
+      "icon": "mail",
+      "url": "osateam2019@gmail.com"
     },
     {
-      "icon": "instagram",
-      "url": "https://www.instagram.com/stackrole/"
+      "icon": "telegram",
+      "url": "https://t.me/OleGio13"
     },
     {
-      "icon": "linkedin",
-      "url": "https://in.linkedin.com/company/stackrole"
+      "icon": "telegram",
+      "url": "https://t.me/PowerOfHydraByOSATeam"
     },
     {
-      "icon": "youtube",
-      "url": "https://www.youtube.com/channel/UCc1hYgIP_DzFMMzwLRcbDVQ"
-    },
-    {
-      "icon": "dribbble",
-      "url": "https://dribbble.com/stackrole"
+      "icon": "discord",
+      "url": "https://t.me/PowerOfHydraByOSATeam"
     }
   ]
 }

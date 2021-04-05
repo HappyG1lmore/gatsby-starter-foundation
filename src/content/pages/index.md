@@ -1,9 +1,9 @@
 ---
 template: index-page
 slug: /
-title: Номинирование в ноды без проблем
-tagline: Заботимся о том, чтобы узлы работали 24/7
-featuredImage: /assets/toa-heftiba-0rlfirsdvzu-unsplash.jpg
+title: Номинация токенов
+tagline: Присоединяйтесь и зарабатывайте с нами
+featuredImage: /assets/fon_temnyy_vraschenie_soedinenie_51880_1024x768.jpg
 cta:
   ctaText: Contact Us
   ctaLink: /contact

@@ -1,10 +1,15 @@
 /** @jsx jsx */
+import React from "react"
 import { jsx } from 'theme-ui'
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { RiArrowRightSLine } from "react-icons/ri"
-import { RiFacebookBoxFill, RiTwitterFill, RiLinkedinBoxFill, RiYoutubeFill, RiInstagramFill, RiRssFill, RiGithubFill, RiTelegramFill, RiPinterestFill, RiSnapchatFill, RiSkypeFill,RiDribbbleFill, RiMediumFill, RiBehanceFill} from "react-icons/ri";
-import { FaWordpress, FaVk} from "react-icons/fa";
+import {RiTelegramFill, RiDiscordFill} from "react-icons/ri";
+import {IoIosMail} from "react-icons/io";
+
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
+
 
 import Layout from "../components/layout"
 import BlogListHome from "../components/blog-list-home"
@@ -65,29 +70,83 @@ export const pageQuery = graphql`
 
 const HomePage = ({ data }) => {
   const { markdownRemark, posts } = data // data.markdownRemark holds your post data
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  console.log(`Hi!!!`)
+  const handlePopoverOpen = (event) => {
+    console.log(`mouseenter`)
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+  console.log(`anchorEl`, anchorEl)
+
   const { frontmatter, html } = markdownRemark
   const Image = frontmatter.featuredImage
   ? frontmatter.featuredImage.childImageSharp.gatsbyImageData
   : ""
+  const open = Boolean(anchorEl);
   const sIcons = Icons.socialIcons.map((icons, index) => {
     return(
       <div key={"social icons" + index}>
-        { icons.icon === "facebook" ? (<Link to={icons.url} target="_blank"><RiFacebookBoxFill/></Link>) :"" }
-        { icons.icon === "twitter" ? (<Link to={icons.url} target="_blank"><RiTwitterFill/></Link>) : "" }
-        { icons.icon === "linkedin" ? (<Link to={icons.url} target="_blank"><RiLinkedinBoxFill/></Link>) : "" }
-        { icons.icon === "youtube" ? (<Link to={icons.url} target="_blank"><RiYoutubeFill/></Link>) : ""}
-        { icons.icon === "instagram" ? (<Link to={icons.url} target="_blank"><RiInstagramFill/></Link>) :"" }
-        { icons.icon === "rss" ? (<Link to={icons.url} target="_blank"><RiRssFill/></Link>) : "" }
-        { icons.icon === "github" ? (<Link to={icons.url} target="_blank"><RiGithubFill/></Link>) : "" }
-        { icons.icon === "telegram" ? (<Link to={icons.url} target="_blank"><RiTelegramFill/></Link>) : "" }
-        { icons.icon === "pinterest" ? (<Link to={icons.url} target="_blank"><RiPinterestFill/></Link>) : "" }
-        { icons.icon === "snapchat" ? (<Link to={icons.url} target="_blank"><RiSnapchatFill/></Link>) : "" }
-        { icons.icon === "skype" ? (<Link to={icons.url} target="_blank"><RiSkypeFill/></Link>) : "" }
-        { icons.icon === "wordpress" ? (<Link to={icons.url} target="_blank"><FaWordpress/></Link>  ) : "" }
-        { icons.icon === "dribbble" ? (<Link to={icons.url} target="_blank"><RiDribbbleFill/></Link>) : "" }
-        { icons.icon === "medium" ? (<Link to={icons.url} target="_blank"><RiMediumFill/></Link>) : "" }
-        { icons.icon === "behance" ? (<Link to={icons.url} target="_blank"><RiBehanceFill/></Link>) : "" }
-        { icons.icon === "vk" ? (<Link to={icons.url} target="_blank"><FaVk/></Link>   ) : "" }
+        { icons.icon === "telegram" && (
+          <>
+            <Link
+              to={icons.url}
+              target="_blank"
+              onMouseEnter={handlePopoverOpen}
+              onMouseLeave={handlePopoverClose}
+            >
+              <RiTelegramFill/>
+            </Link>
+
+          </>
+        )}
+        { icons.icon === "discord" && (
+          <Link
+            to={icons.url}
+            target="_blank"
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
+          >
+            <RiDiscordFill/>
+          </Link>
+        )}
+        { icons.icon === "mail" && (
+          <>
+          <Typography
+            aria-owns={open ? 'mouse-over-popover' : undefined}
+            aria-haspopup="true"
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
+          >
+          <Link
+            to={icons.url}
+            target="_blank"
+          >
+            <IoIosMail/>
+          </Link>
+            </Typography>
+          <Popover
+            id="mouse-over-popover"
+            open={open}
+            anchorEl={anchorEl}
+            anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+            }}
+            transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left',
+            }}
+            onClose={handlePopoverClose}
+            disableRestoreFocus
+          >
+            <Typography>I use Popover.</Typography>
+          </Popover>
+          </>
+        )}
       </div>
     )
   })

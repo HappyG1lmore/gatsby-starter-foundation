@@ -16,12 +16,12 @@ export default function BlogListHome(props) {
 
 const PostMaker = ({ data }) => (
   <section className="home-posts">
-    <h2>Latest in <strong>Projects</strong> <span className="icon -right"><RiArrowDownLine/></span></h2>
+    <h2>Список проектов <strong></strong> <span className="icon -right"><RiArrowDownLine/></span></h2>
     <div className="grids col-1 sm-2 lg-3">
       {data}
     </div>
     <Link 
-      className="button" 
+      className="button button_seeMore"
       to="/blog"
       sx={{
         variant: 'links.button'

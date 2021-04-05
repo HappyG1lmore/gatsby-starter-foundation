@@ -7,6 +7,11 @@
 // 	grid-template-rows: 60px auto 60px;
 // 	min-height: 100vh;
 // }
+@font-face {
+	font-family: "Signika";
+	src: url("../fonts/SignikaNegative-Bold.ttf");
+}
+
 .primary-container main {
 	min-height: calc(100vh - 60px - 81px);
 }
@@ -14,6 +19,15 @@
 
   padding: 30px 20px;
 }
+
+.button.button_seeMore {
+	display: none;
+}
+
+.social-icons {
+	display: none;
+}
+
 
 .site-header-container {
 	display: flex;
@@ -104,6 +118,8 @@
 .site-logo {
   font-weight: bold;
   a {
+	  font-family: "Signika", sans-serif;
+	  font-size: 35px;
     color: #fff;
 		text-decoration: none;
 		&:hover {
@@ -449,5 +465,5 @@ article img {
 @import "utility";
 
 // Libraries
-@import "lib/prism-default"
+@import "lib/prism-default";
 
