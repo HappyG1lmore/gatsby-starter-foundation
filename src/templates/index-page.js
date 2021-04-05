@@ -6,13 +6,11 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { RiArrowRightSLine } from "react-icons/ri"
 import {RiTelegramFill, RiDiscordFill} from "react-icons/ri";
 import {IoIosMail} from "react-icons/io";
-
-import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
-
-
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import Layout from "../components/layout"
 import BlogListHome from "../components/blog-list-home"
+import SocialWithTooltip from "../components/social-with-tooltip"
 import SEO from "../components/seo"
 import Icons from "../util/socialmedia.json"
 
@@ -70,93 +68,85 @@ export const pageQuery = graphql`
 
 const HomePage = ({ data }) => {
   const { markdownRemark, posts } = data // data.markdownRemark holds your post data
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  console.log(`Hi!!!`)
-  const handlePopoverOpen = (event) => {
-    console.log(`mouseenter`)
-    setAnchorEl(event.currentTarget);
-  };
 
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-  };
-  console.log(`anchorEl`, anchorEl)
+  const [isMailAlertOpen, setIsMailAlertOpen] = React.useState(false);
 
   const { frontmatter, html } = markdownRemark
   const Image = frontmatter.featuredImage
   ? frontmatter.featuredImage.childImageSharp.gatsbyImageData
   : ""
-  const open = Boolean(anchorEl);
+
   const sIcons = Icons.socialIcons.map((icons, index) => {
     return(
       <div key={"social icons" + index}>
         { icons.icon === "telegram" && (
-          <>
-            <Link
-              to={icons.url}
+          <SocialWithTooltip text={icons.tooltip}>
+            <a
+              href={icons.url}
               target="_blank"
-              onMouseEnter={handlePopoverOpen}
-              onMouseLeave={handlePopoverClose}
+              rel="noreferrer"
             >
               <RiTelegramFill/>
-            </Link>
-
-          </>
+            </a>
+          </SocialWithTooltip>
         )}
         { icons.icon === "discord" && (
-          <Link
-            to={icons.url}
-            target="_blank"
-            onMouseEnter={handlePopoverOpen}
-            onMouseLeave={handlePopoverClose}
-          >
-            <RiDiscordFill/>
-          </Link>
+          <SocialWithTooltip text={icons.tooltip}>
+            <a
+              href={icons.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <RiDiscordFill/>
+            </a>
+          </SocialWithTooltip>
         )}
         { icons.icon === "mail" && (
           <>
-          <Typography
-            aria-owns={open ? 'mouse-over-popover' : undefined}
-            aria-haspopup="true"
-            onMouseEnter={handlePopoverOpen}
-            onMouseLeave={handlePopoverClose}
-          >
-          <Link
-            to={icons.url}
-            target="_blank"
-          >
-            <IoIosMail/>
-          </Link>
-            </Typography>
-          <Popover
-            id="mouse-over-popover"
-            open={open}
-            anchorEl={anchorEl}
-            anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-            }}
-            transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-            }}
-            onClose={handlePopoverClose}
-            disableRestoreFocus
-          >
-            <Typography>I use Popover.</Typography>
-          </Popover>
+            <SocialWithTooltip text={icons.tooltip}>
+              <a
+                href=''
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  navigator.clipboard.writeText(icons.url).then(() => {
+                    setIsMailAlertOpen(true)
+                  })
+                }}
+              >
+                <IoIosMail />
+              </a>
+            </SocialWithTooltip>
+            <Snackbar
+              open={isMailAlertOpen}
+              autoHideDuration={6000}
+              onClose={(event, reason) => {
+                if (reason === 'clickaway') {
+                  return;
+                }
+                setIsMailAlertOpen(false);
+              }}
+            >
+              <MuiAlert
+                elevation={6}
+                severity="info"
+                variant="filled"
+              >
+                Адрес почты скопирован в буфер обмена.
+              </MuiAlert>
+            </Snackbar>
           </>
         )}
       </div>
     )
   })
+
 	return (
 		<Layout>
       <SEO/>
       <div className="home-banner grids col-1 sm-2">
         <div>
           <h1 className="title">{frontmatter.title}</h1>
-          <p 
+          <p
             className="tagline"
             sx={{
               color: 'muted'
@@ -165,8 +155,8 @@ const HomePage = ({ data }) => {
             {frontmatter.tagline}
           </p>
           <div className="description" dangerouslySetInnerHTML={{__html: html}}/>
-          <Link 
-            to={frontmatter.cta.ctaLink} 
+          <Link
+            to={frontmatter.cta.ctaLink}
             className="button"
             sx={{
               variant: 'links.button'

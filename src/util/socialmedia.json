@@ -2,15 +2,18 @@
   "socialIcons": [
     {
       "icon": "mail",
-      "url": "osateam2019@gmail.com"
+      "url": "osateam2019@gmail.com",
+      "tooltip": "Нажми чтобы скопировать адрес почты"
     },
     {
       "icon": "telegram",
-      "url": "https://t.me/OleGio13"
+      "url": "https://t.me/OleGio13",
+      "tooltip": "Мой первый телеграм канал"
     },
     {
       "icon": "telegram",
-      "url": "https://t.me/PowerOfHydraByOSATeam"
+      "url": "https://t.me/PowerOfHydraByOSATeam",
+      "tooltip": "Мой второй телеграм канал"
     },
     {
       "icon": "discord",
