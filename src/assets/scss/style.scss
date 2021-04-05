@@ -11,12 +11,21 @@
 	min-height: calc(100vh - 60px - 81px);
 }
 .site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+
   padding: 30px 20px;
 }
+
+.site-header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+
+	margin: 0 auto;
+	max-width: 1240px;
+	padding: 0 20px;
+}
+
 .site-navigation {
   ul {
     list-style: none;

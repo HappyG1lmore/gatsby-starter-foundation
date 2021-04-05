@@ -1,8 +1,12 @@
 ---
 template: contact-page
 slug: /contact
-title: Get in touch
+title: Завадайте любые вопросы
 ---
-Got a burning question regarding **JAMstack**, Need a new **Website**, or just anything in general. We are happy to talk.
 
-Just send us a message using the form below or you can send us a DM on [Twitter](https://twitter.com/stackrole)
+**Telegram ЛС** - @OleGio13. <br>
+**Telegram канал (HydraDX)** - https://t.me/PowerOfHydraByOSATeam. <br>
+**Discord** - Ole#5497 <br>
+**Email** - osateam2019@gmail.com <br>
+
+Либо же через форму
